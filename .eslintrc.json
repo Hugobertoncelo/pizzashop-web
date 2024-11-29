@@ -1,0 +1,35 @@
+{
+    "extends": ["@rocketseat/eslint-config/react"],
+    "plugins": ["simple-import-sort"],
+    "rules": {
+        "simple-import-sort/imports": "error"
+    }
+}
+/*
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+	  "@typescript-eslint",
+	  "prettier"
+	],
+	"extends": [
+	  "eslint:recommended",
+	  "plugin:@typescript-eslint/eslint-recommended",
+	  "plugin:@typescript-eslint/recommended",
+	  "prettier/@typescript-eslint",
+	  "plugin:prettier/recommended"
+	],
+	"rules": {
+	  "no-console": "warn",
+	  "prefer-const":"off",
+	  "prettier/prettier": [
+		"error",
+		{
+		  "endOfLine": "auto"
+		}
+	  ]
+
+	}
+  }
+	*/
