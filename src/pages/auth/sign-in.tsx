@@ -25,7 +25,7 @@ export function SignIn() {
         formState: { isSubmitting },
     } = useForm<SignInForm>({
         defaultValues: {
-            email: searchParams.get('email') ?? '',
+            email: searchParams.get('email') ?? ''
         }
     })
 
