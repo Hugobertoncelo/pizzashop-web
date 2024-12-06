@@ -60,7 +60,7 @@ function CustomTooltip({
   return null
 }
 
-export function ReceiptChart() {
+export function RevenueChart() {
   const [period, setPeriod] = useState<DateRange | undefined>({
     from: subDays(new Date(), 7),
     to: new Date(),
