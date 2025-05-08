@@ -1,17 +1,17 @@
-import { useQuery } from '@tanstack/react-query'
-import { Loader2, Utensils } from 'lucide-react'
+import { useQuery } from "@tanstack/react-query";
+import { Loader2, Utensils } from "lucide-react";
 
-import { getMonthOrdersAmount } from '@/api/get-month-orders-amount'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { getMonthOrdersAmount } from "@/api/get-month-orders-amount";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { CardSkeleton } from './card-skeleton'
+import { CardSkeleton } from "./card-skeleton";
 
 export function MonthOrdersAmountCard() {
   const { data: monthOrdersAmount, isFetching: isLoadingMonthOrdersAmount } =
     useQuery({
-      queryKey: ['metrics', 'month-orders-amount'],
+      queryKey: ["metrics", "month-orders-amount"],
       queryFn: getMonthOrdersAmount,
-    })
+    });
 
   return (
     <Card>
@@ -27,21 +27,21 @@ export function MonthOrdersAmountCard() {
         {monthOrdersAmount ? (
           <>
             <span className="text-2xl font-bold">
-              {monthOrdersAmount.amount.toLocaleString('pt-BR')}
+              {monthOrdersAmount.amount.toLocaleString("pt-BR")}
             </span>
             <p className="text-xs text-muted-foreground">
               <span
                 className={
                   monthOrdersAmount.diffFromLastMonth > 0
-                    ? 'text-emerald-500'
-                    : 'text-red-500'
+                    ? "text-emerald-500"
+                    : "text-red-500"
                 }
               >
                 {monthOrdersAmount.diffFromLastMonth > 0
                   ? `+${monthOrdersAmount.diffFromLastMonth}`
                   : monthOrdersAmount.diffFromLastMonth}
                 %
-              </span>{' '}
+              </span>{" "}
               em relação ao mês passado
             </p>
           </>
@@ -50,5 +50,5 @@ export function MonthOrdersAmountCard() {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

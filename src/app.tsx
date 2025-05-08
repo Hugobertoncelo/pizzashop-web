@@ -20,5 +20,5 @@ export function App() {
         </QueryClientProvider>
       </ThemeProvider>
     </HelmetProvider>
-  )
+  );
 }

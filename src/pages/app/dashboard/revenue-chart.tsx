@@ -1,9 +1,8 @@
-
-import { useQuery } from '@tanstack/react-query'
-import { subDays } from 'date-fns'
-import { Loader2, XCircle } from 'lucide-react'
-import { useState } from 'react'
-import { DateRange } from 'react-day-picker'
+import { useQuery } from "@tanstack/react-query";
+import { subDays } from "date-fns";
+import { Loader2, XCircle } from "lucide-react";
+import { useState } from "react";
+import { DateRange } from "react-day-picker";
 import {
   CartesianGrid,
   Line,
@@ -13,28 +12,28 @@ import {
   TooltipProps,
   XAxis,
   YAxis,
-} from 'recharts'
-import { violet } from 'tailwindcss/colors'
+} from "recharts";
+import { violet } from "tailwindcss/colors";
 
-import { getDailyRevenueInPeriod } from '@/api/get-daily-revenue-in-period'
-import { Button } from '@/components/ui/button'
+import { getDailyRevenueInPeriod } from "@/api/get-daily-revenue-in-period";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { DateRangePicker } from '@/components/ui/date-range-picker'
-import { Label } from '@/components/ui/label'
+} from "@/components/ui/card";
+import { DateRangePicker } from "@/components/ui/date-range-picker";
+import { Label } from "@/components/ui/label";
 
 interface ReceiptDataPerMonth {
-  date: string
-  receipt: number
+  date: string;
+  receipt: number;
 }
 
 export interface ReceiptChartProps {
-  data: ReceiptDataPerMonth[]
+  data: ReceiptDataPerMonth[];
 }
 
 function CustomTooltip({
@@ -48,23 +47,23 @@ function CustomTooltip({
         <span className="font-semibold">{label}</span>
         <span>-</span>
         <span>
-          {payload[0].value?.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
+          {payload[0].value?.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
           })}
         </span>
       </div>
-    )
+    );
   }
 
-  return null
+  return null;
 }
 
 export function RevenueChart() {
   const [period, setPeriod] = useState<DateRange | undefined>({
     from: subDays(new Date(), 7),
     to: new Date(),
-  })
+  });
 
   const {
     data: dailyReceiptInPeriod,
@@ -72,19 +71,19 @@ export function RevenueChart() {
     error: dailyReceiptError,
   } = useQuery({
     retry: false,
-    queryKey: ['metrics', 'daily-receipt-in-period', period],
+    queryKey: ["metrics", "daily-receipt-in-period", period],
     queryFn: () =>
       getDailyRevenueInPeriod({
         from: period?.from,
         to: period?.to,
       }),
-  })
+  });
 
   function handleResetPeriod() {
     setPeriod({
       from: subDays(new Date(), 7),
       to: new Date(),
-    })
+    });
   }
 
   return (
@@ -124,9 +123,9 @@ export function RevenueChart() {
                     axisLine={false}
                     width={80}
                     tickFormatter={(value: number) =>
-                      value.toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
+                      value.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
                       })
                     }
                   />
@@ -137,7 +136,7 @@ export function RevenueChart() {
                     type="linear"
                     strokeWidth={2}
                     dataKey="receipt"
-                    stroke={violet['500']}
+                    stroke={violet["500"]}
                   />
 
                   <Tooltip cursor={false} content={<CustomTooltip />} />
@@ -181,5 +180,5 @@ export function RevenueChart() {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }
